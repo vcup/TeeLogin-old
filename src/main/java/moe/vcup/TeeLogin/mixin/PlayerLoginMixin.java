@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerManager.class)
-public abstract class PlayerLoginMixin {
+public abstract class PlayerLoginMixin{
     @Shadow @Final private static Logger LOGGER;
 
     @Shadow public abstract MinecraftServer getServer();

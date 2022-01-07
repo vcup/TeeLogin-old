@@ -2,8 +2,8 @@ package moe.vcup.TeeLogin.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import moe.vcup.TeeLogin.Callbacks.PlayerLoginCallback;
 import moe.vcup.TeeLogin.TeeLogin;
-import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -14,12 +14,11 @@ import net.minecraft.world.World;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
 
 
-public final class LoginManager {
+public final class LoginManager{
     public static Logger LOGGER = TeeLogin.LOGGER;
     public static HashSet<ServerPlayerEntity> LoggedPlayers;
     public static HashMap<String, Location> PlayerLocations;
@@ -103,12 +102,14 @@ public final class LoginManager {
         player.changeGameMode(PlayerLocations.get(getPlayerId(player)).gameMode);
         teleportPlayerToLocation(player);
         LoggedPlayers.add(player);
+        callbacks.get(player).onLogged();
         return true;
     }
 
     public static void LoggedOutPlayer(ServerPlayerEntity player){
         if (LoggedPlayers.remove(player)) {
             setPlayerLocation(player);
+            callbacks.get(player).onLogout();
         }
     }
 
@@ -148,4 +149,10 @@ public final class LoginManager {
         }
         return true;
     }
+
+    public static void registerCallback(ServerPlayerEntity player, PlayerLoginCallback callback){
+        callbacks.put(player, callback);
+    }
+
+    private static HashMap<ServerPlayerEntity, PlayerLoginCallback> callbacks = new HashMap<>();
 }

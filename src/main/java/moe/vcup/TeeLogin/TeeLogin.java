@@ -60,12 +60,11 @@ public class TeeLogin implements ModInitializer {
 		} else if (PasswordManager.playerIsNeedCheckPassword(player)){
 			Messenger.m(player, true, "再次输入/login <password> register以确认密码！");
 		} else if (PasswordManager.verifyPassword(player, password)){
-			if (LoginManager.playerIsLogged(player)){
+			if (!LoginManager.LoggedPlayer(player)){
 				Messenger.m(player, true, "您已登录，请勿重复登陆");
 				return 0;
 			}
 			Messenger.m(player, true, "登录成功！");
-			LoginManager.LoggedPlayer(player);
 		} else {
 			Messenger.m(player, true, "密码错误！");
 		}

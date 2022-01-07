@@ -8,7 +8,9 @@
   "client": [],
   "server": [
     "PlayerLoginMixin",
-    "PlayerLogoutMixin"
+    "PlayerLogoutMixin",
+    "RedirectJoinMessage.JoinMessageMixin",
+    "RedirectJoinMessage.LeftMessageMixin"
   ],
   "injectors": {
     "defaultRequire": 1
