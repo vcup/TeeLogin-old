@@ -10,7 +10,8 @@
     "PlayerLoginMixin",
     "PlayerLogoutMixin",
     "RedirectJoinMessage.JoinMessageMixin",
-    "RedirectJoinMessage.LeftMessageMixin"
+    "RedirectJoinMessage.LeftMessageMixin",
+    "DisableLoggedPlayerOffsiteLogin"
   ],
   "injectors": {
     "defaultRequire": 1

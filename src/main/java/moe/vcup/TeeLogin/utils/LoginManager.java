@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.*;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.UUID;
 
 
 public final class LoginManager{
