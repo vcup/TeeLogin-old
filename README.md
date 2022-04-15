@@ -10,5 +10,5 @@
 
 模组会使用 `./config/TeeLogin` 作为文件存放根，其中
   * `location.json` 记录玩家最后一次成功登入之后的下线地点
-  * `password.json` 以明文记录玩家的密码，格式为 "{player-uuid}-{player-name}": "<password>"
+  * `password.json` 以明文记录玩家的密码，格式为 `"{player-uuid}-{player-name}": "<password>"`
 如果需要修改其中任何文件，需要在关闭服务端卸载模组之后操作，否则修改内容将被覆盖。
