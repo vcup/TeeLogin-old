@@ -4,7 +4,7 @@
 
 这是一个运行在 Fabric 下的模组，用于管理服务器登录，仅服务端安装。  
 使用 `/login <password>` 登入游戏，未登录则为旁观者模式。  
-使用 `/login <password>` register 注册一个密码，需要输入两次。  
+使用 `/login <password> register` 注册一个密码，需要输入两次。  
 
 ## 如何管理？
 
