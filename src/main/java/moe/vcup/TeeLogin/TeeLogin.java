@@ -1,5 +1,6 @@
 package moe.vcup.TeeLogin;
 
+import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import moe.vcup.TeeLogin.utils.LoginManager;
@@ -35,16 +36,6 @@ public class TeeLogin implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
-		CommandRegistrationCallback.EVENT.register(((dispatcher, dedicated) -> {
-			dispatcher.register(literal("login")
-				.then(argument("password", string())
-					.executes(this::LoginCommand)
-					.then(literal("register")
-						.executes(this::RegisterCommand)
-					)
-				)
-			);
-		}));
 		try {
 			Files.createDirectories(ConfigDir);
 		} catch (IOException e) {
@@ -52,7 +43,18 @@ public class TeeLogin implements ModInitializer {
 		}
 	}
 
-	public int LoginCommand(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+	public static void registerLoginCommand(CommandDispatcher<ServerCommandSource> dispatcher) {
+		dispatcher.register(literal("login")
+			.then(argument("password", string())
+				.executes(TeeLogin::LoginCommand)
+				.then(literal("register")
+					.executes(TeeLogin::RegisterCommand)
+				)
+			)
+		);
+	}
+
+	public static int LoginCommand(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
 		var player = context.getSource().getPlayer();
 		var password = getString(context, "password");
 		if (!PasswordManager.playerIsRegistered(player)){
@@ -71,7 +73,7 @@ public class TeeLogin implements ModInitializer {
 		return 0;
 	}
 
-	public int RegisterCommand(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
+	public static int RegisterCommand(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
 		var player = context.getSource().getPlayer();
 		var password = getString(context, "password");
 		if (PasswordManager.playerIsRegistered(player)){
