@@ -12,7 +12,11 @@
     "RedirectJoinMessage.JoinMessageMixin",
     "RedirectJoinMessage.LeftMessageMixin",
     "DisableLoggedPlayerOffsiteLogin",
-    "CommandMixin"
+    "CommandMixin",
+    "DisableLoggedPlayerOffsiteLogin",
+    "NotLoggedLimit.ChatLimitMixin",
+    "NotLoggedLimit.CommandLimitMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1
