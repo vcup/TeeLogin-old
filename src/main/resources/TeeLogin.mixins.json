@@ -11,7 +11,9 @@
     "PlayerLogoutMixin",
     "RedirectJoinMessage.JoinMessageMixin",
     "RedirectJoinMessage.LeftMessageMixin",
-    "DisableLoggedPlayerOffsiteLogin"
+    "DisableLoggedPlayerOffsiteLogin",
+    "NotLoggedLimit.ChatLimitMixin"
+
   ],
   "injectors": {
     "defaultRequire": 1
