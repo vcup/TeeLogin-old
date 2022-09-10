@@ -13,10 +13,12 @@ import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.UUID;
 
 
 public final class LoginManager{
@@ -122,7 +124,7 @@ public final class LoginManager{
     }
 
     public static String getPlayerId(ServerPlayerEntity player){
-        return player.getUuidAsString()+"-"+player.getName().asString();
+        return player.getUuidAsString()+"-"+player.getName().getContent();
     }
 
     public static boolean saveLocation(){
@@ -155,5 +157,5 @@ public final class LoginManager{
         callbacks.put(player, callback);
     }
 
-    private static HashMap<ServerPlayerEntity, PlayerLoginCallback> callbacks = new HashMap<>();
+    private static final HashMap<ServerPlayerEntity, PlayerLoginCallback> callbacks = new HashMap<>();
 }

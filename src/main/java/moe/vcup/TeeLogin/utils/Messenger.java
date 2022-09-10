@@ -1,16 +1,16 @@
 package moe.vcup.TeeLogin.utils;
 
-import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.BaseText;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
 
 public class Messenger {
     public static void m(ServerPlayerEntity player, boolean actionBar, Object ... fields){
-        BaseText message = new LiteralText("");
+        MutableText message = Text.empty().copy();
+
         for (Object o: fields){
-            if (o instanceof BaseText) {
-                message.append((BaseText) o);
+            if (o instanceof Text) {
+                message.append((Text) o);
                 continue;
             }
             var txt = o.toString();

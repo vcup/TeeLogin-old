@@ -7,7 +7,6 @@ import moe.vcup.TeeLogin.utils.LoginManager;
 import moe.vcup.TeeLogin.utils.Messenger;
 import moe.vcup.TeeLogin.utils.PasswordManager;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.server.command.ServerCommandSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,7 +54,7 @@ public class TeeLogin implements ModInitializer {
 	}
 
 	public static int LoginCommand(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-		var player = context.getSource().getPlayer();
+		var player = context.getSource().getPlayerOrThrow();
 		var password = getString(context, "password");
 		if (!PasswordManager.playerIsRegistered(player)){
 			Messenger.m(player, true, "首先通过/login <password> register注册！");
@@ -74,7 +73,7 @@ public class TeeLogin implements ModInitializer {
 	}
 
 	public static int RegisterCommand(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-		var player = context.getSource().getPlayer();
+		var player = context.getSource().getPlayerOrThrow();
 		var password = getString(context, "password");
 		if (PasswordManager.playerIsRegistered(player)){
 			Messenger.m(player, true, "你已注册！通过/login <password> 登入游戏，如需修改密码请联系管理员");

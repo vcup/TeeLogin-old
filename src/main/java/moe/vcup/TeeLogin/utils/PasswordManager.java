@@ -44,7 +44,7 @@ public class PasswordManager
     }
 
     public static String getPlayerId(ServerPlayerEntity player){
-        return player.getUuidAsString()+"-"+player.getName().asString();
+        return player.getUuidAsString()+"-"+player.getName().getContent();
     }
 
     public static String getPlayerPassword(String playerId){
