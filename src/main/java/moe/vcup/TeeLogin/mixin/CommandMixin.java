@@ -2,6 +2,7 @@ package moe.vcup.TeeLogin.mixin;
 
 import com.mojang.brigadier.CommandDispatcher;
 import moe.vcup.TeeLogin.TeeLogin;
+import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import org.spongepowered.asm.mixin.Final;
@@ -18,7 +19,7 @@ public class CommandMixin {
     private CommandDispatcher<ServerCommandSource> dispatcher;
 
     @Inject(method = "<init>", at = @At("RETURN"))
-    public void onInit(CommandManager.RegistrationEnvironment environment, CallbackInfo ci) {
+    public void onInit(CommandManager.RegistrationEnvironment environment, CommandRegistryAccess commandRegistryAccess, CallbackInfo ci) {
         TeeLogin.registerLoginCommand(this.dispatcher);
     }
 }
